@@ -1,0 +1,15 @@
+This modules implements the tiger hash.  See 
+http://www.cs.technion.ac.il/~biham/Reports/Tiger/ for details.
+
+Usage:
+use Digest::Tiger;
+
+# hash() returns a 192 bit hash
+my $hash = Digest::Tiger::hash('Tiger')
+
+# hexhash() returns a hex representation of the 192 bits...
+# $hexhash should be '9F00F599072300DD276ABB38C8EB6DEC37790C116F9D2BDF'
+my $hexhash = Digest::Tiger::hexhash('Tiger')
+
+This program is free software; you can redistribute it and/or 
+modify it under the same terms as Perl itself.  
