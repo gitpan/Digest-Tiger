@@ -3,10 +3,7 @@
 
 ######################### We start with some black magic to print on failure.
 
-# Change 1..1 below to 1..last_test_to_print .
-# (It may become useful if the test is moved to ./t subdirectory.)
-
-BEGIN { $| = 1; print "1..4\n"; }
+BEGIN { $| = 1; print "1..6\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use Digest::Tiger;
 $loaded = 1;
@@ -14,28 +11,40 @@ print "ok 1\n";
 
 ######################### End of black magic.
 
-# Insert your test code below (better if it prints "ok 13"
-# (correspondingly "not ok 13") depending on the success of chunk 13
-# of the test code):
+my $tc = 2;
 
-if (Digest::Tiger::hexhash('abc') eq 'F258C1E88414AB2A527AB541FFC5B8BF935F7B951C132951') {
-  print "ok 2\n";
+if (Digest::Tiger::hexhash('') eq '3293AC630C13F0245F92BBB1766E16167A4E58492DDE73F3') {
+  print 'ok ' . $tc++ . "\n";
 }
 else {
-  print "not ok 2\n";
+  print 'not ok ' . $tc++ . "\n";
 }
 
-if (Digest::Tiger::hexhash('Tiger') eq '9F00F599072300DD276ABB38C8EB6DEC37790C116F9D2BDF') {
-  print "ok 3\n";
+if (Digest::Tiger::hexhash('abc') eq '2AAB1484E8C158F2BFB8C5FF41B57A525129131C957B5F93') {
+  print 'ok ' . $tc++ . "\n";
 }
 else {
-  print "not ok 3\n";
+  print 'not ok ' . $tc++ . "\n";
 }
 
-if (Digest::Tiger::hexhash('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-') eq '87FB2A9083851CF7470D2CF810E6DF9EB586445034A5A386') {
-  print "ok 4\n";
+if (Digest::Tiger::hexhash('Tiger') eq 'DD00230799F5009FEC6DEBC838BB6A27DF2B9D6F110C7937') {
+  print 'ok ' . $tc++ . "\n";
 }
 else {
-  print "not ok 4\n";
+  print 'not ok ' . $tc++ . "\n";
+}
+
+if (Digest::Tiger::hexhash('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-') eq 'F71C8583902AFB879EDFE610F82C0D4786A3A534504486B5') {
+  print 'ok ' . $tc++ . "\n";
+}
+else {
+  print 'not ok ' . $tc++ . "\n";
+}
+
+if (Digest::Tiger::hexhash('Tiger - A Fast New Hash Function, by Ross Anderson and Eli Biham') eq '8A866829040A410C729AD23F5ADA711603B3CDD357E4C15E') {
+  print 'ok ' . $tc++ . "\n";
+}
+else {
+  print 'not ok ' . $tc++ . "\n";
 }
 

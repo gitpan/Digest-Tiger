@@ -76,3 +76,31 @@ hash(...)
 
     ST(0) = sv_2mortal(newSVpv( (char *) res, 24));
     XSRETURN(1);
+
+void
+hexhash(...)
+  PREINIT:
+    unsigned char *data;
+    STRLEN len;
+    word64 res[3];
+    char hexhash_string[49];
+  PPCODE:
+    data = (unsigned char *)(SvPV(ST(0), len));
+    tiger(data, len,  res);
+
+    /* we don't need an endian swap */
+
+    sprintf(hexhash_string, "%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+            (byte)(res[0]),  (byte)(res[0]>>8),       (byte)(res[0]>>16),
+            (byte)(res[0]>>24),  (byte)(res[0]>>32),  (byte)(res[0]>>40), 
+            (byte)(res[0]>>48),  (byte)(res[0]>>56),  (byte)(res[1]), 
+            (byte)(res[1]>>8),   (byte)(res[1]>>16),  (byte)(res[1]>>24), 
+            (byte)(res[1]>>32),  (byte)(res[1]>>40),  (byte)(res[1]>>48), 
+            (byte)(res[1]>>56),  (byte)(res[2]),      (byte)(res[2]>>8), 
+            (byte)(res[2]>>16),  (byte)(res[2]>>24),  (byte)(res[2]>>32), 
+            (byte)(res[2]>>40),  (byte)(res[2]>>48),  (byte)(res[2]>>56) 
+           );
+
+    ST(0) = sv_2mortal(newSVpv( hexhash_string, 48));
+    XSRETURN(1);
+
