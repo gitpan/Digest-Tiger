@@ -33,3 +33,5 @@ rather than to define any particular print order.
 ...using a standard printing method, like the one for MD5 or SHA-1,
 the DD should probably should be printed first [for the example above]".
 
+Version 0.03 fixes endian detection for 64-bit Intel machines.
+
